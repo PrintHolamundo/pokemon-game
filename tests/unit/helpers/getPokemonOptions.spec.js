@@ -1,4 +1,7 @@
-import { getPokemons , getPokemonsNames } from "@/helpers/getPokemonOptions";
+import getPokemonOptions, {
+    getPokemons,
+    getPokemonsNames,
+} from "@/helpers/getPokemonOptions";
 
 describe("getPokemonOptions helpers", () => {
     test("debe de regresar un arreglo de numeros", () => {
@@ -9,17 +12,36 @@ describe("getPokemonOptions helpers", () => {
         expect(pokemons[649]).toBe(650);
     });
 
-    test("debe de retornar un arreglo de 4 elementos con nombres de pokemons", async() => { 
-        const pokemons = await getPokemonsNames([1,2,3,4]);
+    test("debe de retornar un arreglo de 4 elementos con nombres de pokemons", async () => {
+        const pokemons = await getPokemonsNames([1, 2, 3, 4]);
         expect(pokemons).toStrictEqual([
-            {name: "bulbasaur",id: 1},
-            {name: "ivysaur",id: 2},
-            {name: "venusaur",id: 3},
-            {name: "charmander",id: 4}
-
-        ])
-
+            { name: "bulbasaur", id: 1 },
+            { name: "ivysaur", id: 2 },
+            { name: "venusaur", id: 3 },
+            { name: "charmander", id: 4 },
+        ]);
     });
 
-    test("getPokemonsOptions debe de retornar un arreglo mezclado", () => { });
+    test("getPokemonsOptions debe de retornar un arreglo mezclado", async () => {
+        const pokemons = await getPokemonOptions();
+        expect(pokemons.length).toBe(4);
+        expect(pokemons).toEqual([
+            {
+                name: expect.any(String),
+                id: expect.any(Number),
+            },
+            {
+                name: expect.any(String),
+                id: expect.any(Number),
+            },
+            {
+                name: expect.any(String),
+                id: expect.any(Number),
+            },
+            {
+                name: expect.any(String),
+                id: expect.any(Number),
+            },
+        ]);
+    });
 });

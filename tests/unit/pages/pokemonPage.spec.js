@@ -64,4 +64,29 @@ describe("PokemonPage Component", () => {
 
         
     })
+    test('pruebas con el checkAnswer', async () => {
+            
+            const wrapper = mount( PokemonPage, {
+                data() {
+                    return {
+                        pokemonArr: pokemons,
+                        pokemon: pokemons[0],
+                        showPokemon: false,
+                        showAnswer: false,
+                        message: ''
+                    }
+                }
+            })
+    
+            await wrapper.vm.checkAnswer(5)
+            expect(wrapper.find('h2').exists()).toBe(true)
+            expect(wrapper.vm.showPokemon).toBe(true)
+            expect(wrapper.find('h2').text()).toBe(`¡Oops!, it was ${wrapper.vm.pokemon.name}`)
+            
+            await wrapper.vm.checkAnswer(10)
+            expect(wrapper.vm.message).toBe(`¡Oops!, it was ${wrapper.vm.pokemon.name}`)
+
+    
+
+    })
 })
